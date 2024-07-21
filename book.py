@@ -1,7 +1,10 @@
 class Book:
-    def __init__(self, title, author, isbn):
-        self.details = (title, author, isbn)  # Using a tuple to store book details
+    def __init__(self, title, author, genre, isbn):
+        self.details = (title, author, isbn, genre)  # Using a tuple to store book details
         self.issued_to = None
+        while isbn != int:
+            print("isbn must be integer, please re-enter value.")
+            self.isbn = int(isbn)
     
     @property
     def title(self):
