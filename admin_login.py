@@ -54,9 +54,3 @@ class Admin:
             self.message_box()
         # Close the connection to end database usage properly
         conn.close()
-
-
-if __name__ == "__main__":
-    root = Tk()
-    app = Admin(root)
-    root.mainloop()

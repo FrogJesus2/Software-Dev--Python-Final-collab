@@ -12,7 +12,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS admin(
             )''')
 # Creates the book table in the db
 cursor.execute('''CREATE TABLE IF NOT EXISTS book(
-            book_id INTEGER PRIMARY KEY NOT NULL,
+            book_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             book_title TEXT NOT NULL,
             book_author TEXT NOT NULL,
             book_genre TEXT NOT NULL,
@@ -21,7 +21,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS book(
             )''')
 # Creates the member table in the db
 cursor.execute('''CREATE TABLE IF NOT EXISTS member(
-            member_id INTEGER PRIMARY KEY NOT NULL,
+            member_id INTEGER PRIMARY UNIQUE NOT NULL,
             member_name TEXT NOT NULL,
             member_email TEXT NOT NULL,
             member_number INTEGER NOT NULL,
@@ -31,7 +31,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS member(
 # Creates the transactions table in the db, funny enough I ran into an error because it was 'transaction'
 # Still don't know why it caused an error without the s
 cursor.execute('''CREATE TABLE IF NOT EXISTS transactions(
-            transaction_id INTEGER PRIMARY KEY NOT NULL,
+            transaction_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             borrow_date TEXT,
             return_date TEXT,
             due_date TEXT,

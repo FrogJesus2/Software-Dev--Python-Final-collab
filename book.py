@@ -1,11 +1,9 @@
 class Book:
     def __init__(self, title, author, genre, isbn):
-        self.details = (title, author, isbn, genre)  # Using a tuple to store book details
+        self.details = (title, author, genre, isbn)  # Using a tuple to store book details
         self.issued_to = None
-        while isbn != int:
-            print("isbn must be integer, please re-enter value.")
-            self.isbn = int(isbn)
-    
+        self.list_details = list(self.details)
+
     @property
     def title(self):
         return self.details[0]
@@ -15,11 +13,26 @@ class Book:
         return self.details[1]
     
     @property
-    def isbn(self):
+    def genre(self):
         return self.details[2]
+    
+    @property
+    def isbn(self):
+        return self.details[3]
+    
+    def isbn_setter(self, value):
+        try:
+            self._isbn = int(value)
+        except ValueError:
+            raise ValueError("isbn must be integer, please re-enter value.")
 
+    
     def issue(self, member):
         self.issued_to = member
     
     def return_book(self):
         self.issued_to = None
+
+
+
+
