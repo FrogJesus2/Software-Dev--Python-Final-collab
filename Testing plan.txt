@@ -1,0 +1,36 @@
+1. To start off, launch the application through admin.py
+
+2. We query the database to find matching admin credentials.
+username: admin
+password: password
+
+3. This should close the login screen and open main.py
+
+4. The next step is to enter information for a book. The ISBN is validated to accept integers only.
+(I know typical ISBNs aren't int only just roll with it)
+
+5. If you want to update a book with that ISBN just enter that ISBN with new info. 
+
+6. Add a couple of books.
+
+7. The books will appear in the book list that have been added.
+
+8. For the Remove book part enter a books ISBN to remove it. 
+
+9. Simlarly with adding a book there is validation to check for member id being an integer,
+email requiring @email.com, and phone number requiring 11 digits.
+
+10. Add a few members.
+
+11. You may remove a member as well using the Member ID. 
+
+12. You can check members using the member list. 
+
+13. If you want to issue a user a book you need the books ISBN and the Member ID.
+
+14. The same goes for returning a book. 
+
+15. When you click on transactions it shows a list of transactions and their dates, whether 
+its borrowing or returning a book. 
+
+16. You may now close the program. 
