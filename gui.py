@@ -1,9 +1,19 @@
 import tkinter as tk
+import re
 from tkinter import messagebox
 from library import Library
 from book import Book
 from member import Member
 from datetime import date
+
+def validate_email(email):  
+    if re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email):  
+        return True  
+    return False  
+
+def isValid(phone):
+    Pattern = re.compile("(0|91)?[6-9][0-9]{9}")
+    return Pattern.match(phone) is not None
 
 class LibraryGUI:
     def __init__(self, root, library):
@@ -138,13 +148,21 @@ class LibraryGUI:
         author = self.book_author_entry.get()
         genre = self.book_genre_entry.get()
         isbn = self.book_isbn_entry.get()
+        if not isbn.isdigit():
+            messagebox.showerror("Error", "ISBN must be an integer!")
+            return
         book = Book(title, author, genre, isbn)
+        
         self.library.add_book(book)
+        
         messagebox.showinfo("Success", "Book added successfully!")
     
     # Calls remove_book after getting the text in the entry box.
     def remove_book(self):
         isbn = self.book_remove_isbn_entry.get()
+        if not isbn.isdigit():
+            messagebox.showerror("Error", "ISBN must be an integer!")
+            return
         self.library.remove_book(isbn)
 
     # Uses a for loop to display all the books in a list in another window using tk.Toplevel
@@ -158,12 +176,24 @@ class LibraryGUI:
         for isbn, book in self.library.books.items():
             book_listbox.insert(tk.END, f"Book Title: {book.title}, Book Author: {book.author}, Book Genre: {book.genre}, ISBN: {book.isbn}")
 
-
     def add_member(self):
         member_id = self.member_id_entry.get()
+        if not member_id.isdigit():
+            messagebox.showerror("Error", "Member ID must be an integer!")
+            return
         name = self.member_name_entry.get()
         email = self.member_email_entry.get()
+
+        if not validate_email(email):
+            messagebox.showerror("Error", "That email is not valid.")
+            return
+        
         phone = self.member_phone_entry.get()
+
+        if not isValid(phone):
+            messagebox.showerror("Error", "That phone number is not valid.")
+            return
+        
         address = self.member_address_entry.get()
         member = Member(member_id, name, email, phone, address)
         self.library.add_member(member)
@@ -172,6 +202,9 @@ class LibraryGUI:
     # Calls remove_member after getting the text in the entry box.
     def remove_member(self):
         member_id = self.member_remove_id_entry.get()
+        if not member_id.isdigit():
+            messagebox.showerror("Error", "Member ID must be an integer!")
+            return
         self.library.remove_member(member_id)
 
     # Uses a for loop to display all the members in a list in another window using tk.Toplevel
@@ -188,7 +221,13 @@ class LibraryGUI:
     # I updated the issue_book function to include storing information for a transaction list in a dictionary
     def issue_book(self):
         isbn = self.issue_isbn_entry.get()
+        if not isbn.isdigit():
+            messagebox.showerror("Error", "ISBN must be an integer!")
+            return
         member_id = self.issue_member_id_entry.get()
+        if not member_id.isdigit():
+            messagebox.showerror("Error", "Member ID must be an integer!")
+            return
         self.library.issue_book(isbn, member_id)
         self.transaction_id += 1
         today = date.today()
@@ -203,7 +242,13 @@ class LibraryGUI:
     # I basically did the same thing with return, they both give a unique transaction id that gets incremented every time someone borrows or returns a book
     def return_book(self):
         isbn = self.return_isbn_entry.get()
+        if not isbn.isdigit():
+            messagebox.showerror("Error", "ISBN must be an integer!")
+            return
         member_id = self.return_member_id_entry.get()
+        if not member_id.isdigit():
+            messagebox.showerror("Error", "Member ID must be an integer!")
+            return
         self.library.return_book(isbn, member_id)
         self.transaction_id += 1
         today = date.today()
